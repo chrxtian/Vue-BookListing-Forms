@@ -27,7 +27,7 @@ export default {
   name: "BookList",
   data() {
     return {
-      searchInput: ""
+      searchInput: "",
       title: "All Books",
       states: ["Want to Read", "Read", "Reading"],
       books: [
