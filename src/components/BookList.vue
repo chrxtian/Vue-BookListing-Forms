@@ -1,10 +1,17 @@
 <template>
   <div>
     <h1>{{title}}</h1>
-    <ul>
+    <ul class="exists">
       <book-item v-for='book in books' :key='book.id' :book='book'></book-item>
     </ul>
-
+    <hr>
+    <h2>Filtered Books by ownership</h2>
+    <select v-model="holding">
+      <option v-for="filter in filters">{{filter}}</option>
+    </select>
+    <ul class="exists">
+      <book-item v-for='book in filteredBooks' :key='book.id' :book='book'></book-item>
+    </ul>
     <br><hr>
     <book-form @addBook='appendBook'></book-form>
   </div>
@@ -20,6 +27,7 @@ export default {
   name: "BookList",
   data() {
     return {
+      searchInput: ""
       title: "All Books",
       states: ["Want to Read", "Read", "Reading"],
       books: [
@@ -42,12 +50,7 @@ export default {
         }
       ],
       filters: ['bought','borrowed'],
-      holding: 'bought',
-      computed: {
-        filteredBooks: function () {
-          return _.filter(this.books, ["ownership", this.holding]);
-        }
-      }
+      holding: 'bought'
     };
   },
   components: {
@@ -63,6 +66,11 @@ export default {
         finishedReading: bookData.finishedReading,
         ownership: bookData.ownership
       });
+    }
+  },
+  computed: {
+    filteredBooks: function () {
+      return _.filter(this.books, ["ownership", this.holding]);
     }
   }
 };
