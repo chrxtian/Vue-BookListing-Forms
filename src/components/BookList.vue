@@ -43,6 +43,11 @@ export default {
       ],
       filters: ['bought','borrowed'],
       holding: 'bought',
+      computed: {
+        filteredBooks: function () {
+          return _.filter(this.books, ["ownership", this.holding]);
+        }
+      }
     };
   },
   components: {
