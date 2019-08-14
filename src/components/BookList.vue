@@ -14,7 +14,7 @@
 
 import BookItem from "./BookItem";
 import BookForm from "./BookForm";
-
+import _ from 'lodash';
 export default {
   name: "BookList",
   data() {
